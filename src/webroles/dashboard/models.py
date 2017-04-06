@@ -21,11 +21,16 @@ class JsonResultMixin(object):
 class Question(models.Model, TimeStampMixin):
     question = models.CharField(unique=True, max_length=255)
 
+    def __str__(self):
+        return self.question
+
 
 class Answer(models.Model, TimeStampMixin):
     answer = models.CharField(max_length=255)
     question = models.ForeignKey(Question, related_name="answers")
 
+    def __str__(self):
+        return self.question + ": " + self.answer
 
 class UserResponse(models.Model, TimeStampMixin, JsonResultMixin):
     user = models.ForeignKey(User, related_name="responses")
