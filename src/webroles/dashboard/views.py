@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.views import View
+from django.views.generic import TemplateView
 from dashboard import models
 import json
 
-# Create your views here.
 
 class QuestionAPI(View):
     
@@ -17,4 +17,11 @@ class QuestionAPI(View):
             }
         return HttpResponse(json.dumps(return_blob, indent=2))
 
-    
+
+class SplashPage(TemplateView):
+    template_name = "dashboard/splash.html"
+
+class AnswerQuestionsView(View):
+
+    def get(self, request):
+        pass
