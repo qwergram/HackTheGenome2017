@@ -1,13 +1,13 @@
 from django.db import models
-from django.contrib.auth import User
+from django.contrib.auth.models import User
 import json
 
 # Create your models here.
 
 
 class TimeStampMixin(object):
-    date_created = models.TimeDate(auto_now_add=True)
-    date_modified = models.TimeDate(auto_now=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
 
 
 class JsonResultMixin(object):
@@ -24,11 +24,11 @@ class Question(models.Model, TimeStampMixin):
 
 class Answer(models.Model, TimeStampMixin):
     answer = models.CharField(max_length=255)
-    question = models.ForeignKey(related_name="answers")
+    question = models.ForeignKey(Question, related_name="answers")
 
 
 class UserResponse(models.Model, TimeStampMixin, JsonResultMixin):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name="responses")
     
     def similarity(self, diseaseModel):
         return 0
