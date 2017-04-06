@@ -30,7 +30,7 @@ class Answer(models.Model, TimeStampMixin):
     question = models.ForeignKey(Question, related_name="answers")
 
     def __str__(self):
-        return self.question + ": " + self.answer
+        return str(self.question) + ": " + str(self.answer)
 
 class UserResponse(models.Model, TimeStampMixin, JsonResultMixin):
     user = models.ForeignKey(User, related_name="responses")
