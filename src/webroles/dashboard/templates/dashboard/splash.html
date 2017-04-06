@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE HTML>
 <!--
 	Aerial by HTML5 UP
@@ -6,13 +7,13 @@
 -->
 <html>
 	<head>
-		<title>Aerial by HTML5 UP</title>
+		<title>Team 0</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><script src="{% static "aerial/js/ie/html5shiv.js" %}"></script><![endif]-->
+		<link rel="stylesheet" href="{% static "aerial/css/main.css" %}" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="{% static "aerial/css/ie8.css" %}" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="{% static "aerial/css/ie9.css" %}" /><![endif]-->
 	</head>
 	<body class="loading">
 		<div id="wrapper">
@@ -22,27 +23,27 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1>Adam Jensen</h1>
-						<p>Security Chief &nbsp;&bull;&nbsp; Cyborg &nbsp;&bull;&nbsp; Never asked for this</p>
+						<h1>Hack the Genome: Team 0</h1>
+						<p><a href="htpp://www.linkedin.com/in/nortonpengra">Norton Pengra</a> &nbsp;&bull;&nbsp; Alex Salley</p>
 						<nav>
 							<ul>
-								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+								<!--<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 								<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-								<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-								<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+								<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>-->
+								<li><a href="https://github.com/qwergram/HackTheGenome2017" class="icon fa-github"><span class="label">Github</span></a></li>
+								<!--<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>-->
 							</ul>
 						</nav>
 					</header>
 
 				<!-- Footer -->
 					<footer id="footer">
-						<span class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>.</span>
+						<span class="copyright">&copy; MIT License. Design: <a href="http://html5up.net">HTML5 UP</a>.</span>
 					</footer>
 
 			</div>
 		</div>
-		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<!--[if lte IE 8]><script src="{% static "aerial/js/ie/respond.min.js" %}"></script><![endif]-->
 		<script>
 			window.onload = function() { document.body.className = ''; }
 			window.ontouchmove = function() { return false; }
