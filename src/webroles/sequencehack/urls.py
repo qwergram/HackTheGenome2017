@@ -19,5 +19,6 @@ from dashboard import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/v1/questions', views.QuestionAPI.as_view())
+    url(r'^api/v1/questions', views.QuestionAPI.as_view()),
+    url(r'^$', views.SplashPage.as_view())
 ]
