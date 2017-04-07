@@ -73,6 +73,8 @@
 				</div>
 			</section>
 
+			<form method="post" action="/submit/">
+
 			<!-- Two -->
 			<section id="two">
 				<div class="container">
@@ -99,64 +101,48 @@
 			<!-- Three -->
 			<section id="three">
 				<div class="container">
-					<h3>A Few Accomplishments</h3>
-					<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non. Adipiscing cubilia
-						elementum integer. Integer eu ante ornare amet commetus.</p>
-					<div class="features">
-						<article>
-							<a href="#" class="image"><img src="{% static "images/pic01.jpg" %}"alt="" /></a>
-							<div class="inner">
-								<h4>Possibly broke spacetime</h4>
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer adipiscing ornare amet.</p>
-							</div>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="{% static "images/pic02.jpg" %}"alt="" /></a>
-							<div class="inner">
-								<h4>Terraformed a small moon</h4>
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer adipiscing ornare amet.</p>
-							</div>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="{% static "images/pic03.jpg" %}"alt="" /></a>
-							<div class="inner">
-								<h4>Snapped dark matter in the wild</h4>
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer adipiscing ornare amet.</p>
-							</div>
-						</article>
-					</div>
+					<h3>Health Questions</h3>
+					
+						{% for question in questionJson %}
+							<h5>{{ question.text }}</h5>
+							{% for choice in question.choices %}
+								<input type="radio" name="{{question.pk}}" value="{{choice.pk}}"> {{choice.text}}<br/>
+							{% endfor %}
+							<br/>
+						{% endfor %}
+					
+					<!-- {{ questionJson }} -->
 				</div>
 			</section>
 
 			<!-- Four -->
 			<section id="four">
 				<div class="container">
-					<h3>Contact Me</h3>
-					<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non. Adipiscing cubilia
-						elementum integer. Integer eu ante ornare amet commetus.</p>
-					<form method="post" action="#">
+					<h3>Submit</h3>
+					<p>If you have any questions or comments, feel free to drop them off here!</p>
+					
 						<div class="row uniform">
-							<div class="6u 12u(xsmall)"><input type="text" name="name" id="name" placeholder="Name" /></div>
-							<div class="6u 12u(xsmall)"><input type="email" name="email" id="email" placeholder="Email" /></div>
+							<div class="6u 12u(xsmall)"><input type="text" name="name" id="name" placeholder="Name (optional)" /></div>
+							<div class="6u 12u(xsmall)"><input type="email" name="email" id="email" placeholder="Email (optional)" /></div>
 						</div>
 						<div class="row uniform">
-							<div class="12u"><input type="text" name="subject" id="subject" placeholder="Subject" /></div>
+							<div class="12u"><input type="text" name="subject" id="subject" placeholder="Subject (optional)" /></div>
 						</div>
 						<div class="row uniform">
-							<div class="12u"><textarea name="message" id="message" placeholder="Message" rows="6"></textarea></div>
+							<div class="12u"><textarea name="message" id="message" placeholder="Message (optional)" rows="6"></textarea></div>
 						</div>
 						<div class="row uniform">
 							<div class="12u">
 								<ul class="actions">
-									<li><input type="submit" class="special" value="Send Message" /></li>
-									<li><input type="reset" value="Reset Form" /></li>
+									<li><input type="submit" class="special" value="Submit Form" /></li>
 								</ul>
 							</div>
 						</div>
-					</form>
+					
 				</div>
 			</section>
-
+			{% csrf_token %}
+		</form>
 		</div>
 
 		<!-- Footer -->
@@ -184,7 +170,7 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
 			$('#sequencing-file-selector-example').sequencingFileSelector({
-				accessToken: '20c92475aa76bd6c7a6b4d2e195ed3f2673d4eaa'
+				accessToken: '2325a0173686dcdc3db438c28822e492a91ec6d3'
 			});
 		});
 
