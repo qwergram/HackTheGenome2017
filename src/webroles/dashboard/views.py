@@ -66,10 +66,13 @@ class HandleAnswersView(View):
         questionForm = forms.BasicQuestionaire(request.POST)
 
         if (questionForm.is_valid()):
-            jsonblob = {int(q[1:]): int(a[1:]) for (q, a) in questionForm.questions.items()}
+            try:
+                jsonblob = {int(q[1:]): int(a[1:]) for (q, a) in questionForm.questions.items()}
+            except ValueError:
+                jsonblob = {}
 
-            if (GenomeForm.is_valid()):
-                pass
+        if (GenomeForm.is_valid()):
+            pass
 
         if (contactForm.is_valid()):
             newFeedBack = models.FeedBackModel(
@@ -80,12 +83,4 @@ class HandleAnswersView(View):
             )
             newFeedBack.save()
 
-        print(request.POST)
-
         return render(request, self.template_name, {})
-
-        if form.is_valid():
-            # <process form cleaned data>
-            return HttpResponseRedirect('/success/')
-
-        return render(request, self.template_name, {'form': form})
