@@ -1,6 +1,6 @@
 try:
     from dashboard.chains.UsageBase import ChainWrapper
-    from dashboard.secrets import TOKEN
+    from dashboard.secrets import *
 except ImportError:
     from UsageBase import ChainWrapper
     TOKEN = None
@@ -24,5 +24,5 @@ class SkinCancerRiskView(View):
 
 
 if __name__ == "__main__":
-    x = _result('59aff2f9a6dcaa1d403666f62e68b862b880e88a', '227679')
+    x = _result('2af4f10acac15b8acf577360d5825616898bcd72', '227679')
     import pdb; pdb.set_trace()
