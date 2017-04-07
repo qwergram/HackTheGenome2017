@@ -8,6 +8,8 @@ import json
 # Include Chains views
 
 from dashboard.chains.skinCancerRisk import SkinCancerRiskView
+from dashboard.chains.liverCancerRisk import LiverCancerRiskView
+from dashboard.chains.prostateCancerRisk import ProstateCancerRiskView
 
 # Other Views
 
@@ -48,9 +50,13 @@ class AnswerQuestionsView(TemplateView):
         context['questionJson'] = questionJson
         return context
         
-
+# Show a cool loading page
 class HandleAnswersView(View):
-    template_name = "dashboard/_questions.html"
+    template_name = "dashboard/loading.html"
+
+    def get(self, request):
+        # Won't actually do anything
+        return render(request, self.template_name, {})
 
     def post(self, request, *args, **kwargs):        
         jsonblob = {}
