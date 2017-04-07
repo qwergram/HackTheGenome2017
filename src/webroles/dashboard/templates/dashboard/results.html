@@ -160,57 +160,85 @@
 
     <script src="{% static "chart.js" %}"></script>
     <script>
-        var myChart = new Chart($('#myChart'), {
-            type: 'radar',
-            data: {
-                labels: ["Liver Cancer", "Lung Cancer", "Prostate Cancer", "Skin Cancer", "Bladder Cancer", "Other"],
-                datasets: [{
-                    label: "% of risk",
-                    backgroundColor: "rgba(179,181,198,0.2)",
-                    borderColor: "rgba(179,181,198,1)",
-                    pointBackgroundColor: "rgba(179,181,198,1)",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "rgba(179,181,198,1)",
-                    data: [3, 2, 4, 5, 6, 9]
-                }],
-                options: {
-                    scale: {
-                        reverse: true,
-                        ticks: {
-                            beginAtZero: true
+        var fileId = '227679';
+        var reportId = '1';
+        
+        var contentData = {}
+
+        console.log(reportId);
+        $.getJSON("/api/v1/userResponse?pk=" + reportId, function(json) {
+            contentData.userResponse = json
+            
+            console.log(json)
+            
+            var myChart2 = new Chart($('#myChart2'), {
+                type: 'radar',
+                data: {
+                    labels: ["Liver Cancer", "Lung Cancer", "Prostate Cancer", "Skin Cancer", "Bladder Cancer", "Leukemia", "Healthy"],
+                    datasets: [{
+                        label: "% of risk",
+                        backgroundColor: "rgba(179,255,198,0.2)",
+                        borderColor: "rgba(179,244,198,1)",
+                        pointBackgroundColor: "rgba(179,181,198,1)",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "rgba(179,181,198,1)",
+                        data: [
+                            contentData.userResponse.liver, 
+                            contentData.userResponse.lung, 
+                            contentData.userResponse.prostate,
+                            contentData.userResponse.skin,
+                            contentData.userResponse.bladder,
+                            contentData.userResponse.leukemia,
+                            contentData.userResponse.healthy
+                        ]
+                    }],
+                    options: {
+                        scale: {
+                            reverse: true,
+                            ticks: {
+                                beginAtZero: true
+                            }
                         }
                     }
                 }
-            }
-            
+                
+            });
         });
 
-        var myChart2 = new Chart($('#myChart2'), {
-            type: 'radar',
-            data: {
-                labels: ["Liver Cancer", "Lung Cancer", "Prostate Cancer", "Skin Cancer", "Bladder Cancer", "Other"],
-                datasets: [{
-                    label: "% of risk",
-                    backgroundColor: "rgba(179,255,198,0.2)",
-                    borderColor: "rgba(179,244,198,1)",
-                    pointBackgroundColor: "rgba(179,181,198,1)",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "rgba(179,181,198,1)",
-                    data: [4, 1, 3, 5, 6, 8]
-                }],
-                options: {
-                    scale: {
-                        reverse: true,
-                        ticks: {
-                            beginAtZero: true
+        $.getJSON("/api/v1/skin?fileid=" + fileId, function(json) {
+            contentData.skin = json.value;
+            $.getJSON("/api/v1/liver?fileid=" + fileId, function(json) {
+                contentData.liver = json.value;
+
+                var myChart = new Chart($('#myChart'), {
+                    type: 'radar',
+                    data: {
+                        labels: ["Liver Cancer", "Lung Cancer", "Prostate Cancer", "Skin Cancer", "Bladder Cancer", "Leukemia"],
+                        datasets: [{
+                            label: "% of risk",
+                            backgroundColor: "rgba(179,181,198,0.2)",
+                            borderColor: "rgba(179,181,198,1)",
+                            pointBackgroundColor: "rgba(179,181,198,1)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgba(179,181,198,1)",
+                            data: [contentData.liver, 0, 0, contentData.skin, 0, 0]
+                        }],
+                        options: {
+                            scale: {
+                                reverse: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
                         }
                     }
-                }
-            }
-            
+                });    
+            });
         });
+
+        
     </script>
 
 </body>
