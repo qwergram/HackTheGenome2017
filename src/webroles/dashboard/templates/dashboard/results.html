@@ -160,30 +160,41 @@
 
     <script src="{% static "chart.js" %}"></script>
     <script>
-        var myChart = new Chart($('#myChart'), {
-            type: 'radar',
-            data: {
-                labels: ["Liver Cancer", "Lung Cancer", "Prostate Cancer", "Skin Cancer", "Bladder Cancer", "Leukemia"],
-                datasets: [{
-                    label: "% of risk",
-                    backgroundColor: "rgba(179,181,198,0.2)",
-                    borderColor: "rgba(179,181,198,1)",
-                    pointBackgroundColor: "rgba(179,181,198,1)",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "rgba(179,181,198,1)",
-                    data: [3, 2, 4, 5, 6, 9]
-                }],
-                options: {
-                    scale: {
-                        reverse: true,
-                        ticks: {
-                            beginAtZero: true
+        var fileId = '227679';
+        
+        var contentData = {}
+
+        $.getJSON("/api/v1/skin?fileid=" + fileId, function(json) {
+            contentData.skin = json.value;
+            console.log(json, skinData)
+            $.getJSON("/api/v1/liver?fileid=" + fileId, function(json) {
+                contentData.liver = json.value;
+
+                var myChart = new Chart($('#myChart'), {
+                    type: 'radar',
+                    data: {
+                        labels: ["Liver Cancer", "Lung Cancer", "Prostate Cancer", "Skin Cancer", "Bladder Cancer", "Leukemia"],
+                        datasets: [{
+                            label: "% of risk",
+                            backgroundColor: "rgba(179,181,198,0.2)",
+                            borderColor: "rgba(179,181,198,1)",
+                            pointBackgroundColor: "rgba(179,181,198,1)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgba(179,181,198,1)",
+                            data: [contentData.liver, 2, 4, contentData.skin, 6, 9]
+                        }],
+                        options: {
+                            scale: {
+                                reverse: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
                         }
                     }
-                }
-            }
-            
+                });    
+            });
         });
 
         var myChart2 = new Chart($('#myChart2'), {
