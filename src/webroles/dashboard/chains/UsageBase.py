@@ -12,13 +12,13 @@ except ImportError:
     from AppChains import Report
 
 class UsageExample(object):
-    token = '2031d2c60358fc08c1a12bece9f89586c59ea935'
     url = 'api.sequencing.com'
     bot = 'StartApp'
-    chain = 'Chain9'
-    fileId = '227679'
 
-    def __init__(self):
+    def __init__(self, token, fileid, chain):
+        self.token = token
+        self.fileid = fileid
+        self.chain = chain
         self.chains = AppChains(self.token, self.url)
         #print(self.get_public_beacon_test())
         #print(self.get_raw_report_test())
@@ -32,12 +32,12 @@ class UsageExample(object):
 
     def get_raw_report_test(self):
         chains_raw_result = self.chains.getRawReport(
-            self.bot, self.chain, self.fileId)
+            "StartApp", self.chain, self.fileId)
         return chains_raw_result
 
     def get_report(self):
         chains_result = self.chains.getReport(
-            self.bot, self.chain, self.fileId)
+            "StartApp", self.chain, self.fileId)
         if chains_result.isSucceeded():
             print('Request has succeeded')
         else:
@@ -70,10 +70,8 @@ class ChainWrapper(object):
         self.token = token
         self.chain = chain
         self.fileid = fileid
-        self.eg = UsageExample()
-        self.eg.token = token
-        self.eg.chain = chain
-        self.eg.fileId = fileid
+        self.eg = UsageExample(token, fileid, chain)
+
 
     def get_report(self):
         return self.eg.get_report()
