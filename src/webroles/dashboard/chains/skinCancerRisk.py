@@ -20,7 +20,20 @@ def _result(token, fileId):
 class SkinCancerRiskView(View):
     
     def get(self, request):
-        return HttpResponse(json.dumps(_result(TOKEN, request.GET['fileid']), indent=2))
+        response = json.dumps(_result(TOKEN, request.GET['fileid']), indent=2)
+        qualitative = json.loads(response.lower())['riskdescription']
+        if 'low' in qualitative:     
+            return HttpResponse('{"value": 1}')
+        if 'normal' in qualitative:
+            return HttpResponse('{"value": 2}')
+        if 'increased' in qualitative:
+            return HttpResponse('{"value": 2.5}')
+        if 'moderate' in qualitative:
+            return HttpResponse('{"value": 5}')
+        if 'very hi' in qualitative:
+            return HttpResponse('{"value": 20}')
+        if 'hi' in qualitative:
+            return HttpResponse('{"value": 15}')
 
 
 if __name__ == "__main__":
