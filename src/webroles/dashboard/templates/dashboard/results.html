@@ -87,12 +87,11 @@
                     <div class="container">
                         <!-- style="opacity: 0.2;"> <!-- -->
                         <h3>Genome Story</h3>
-                        <p>Select your Genome from +RTP
+                        
+                        <div class="row">
+                            <canvas id="myChart" width="400" height="400"></canvas>
+                        </div>
 
-                            <div class="container">
-                            </div>
-
-                        </p>
                     </div>
                 </section>
 
@@ -101,7 +100,9 @@
                     <div class="container">
                         <h3>Questionaire Story</h3>
 
-
+                        <div class="row">
+                            <canvas id="myChart2" width="400" height="400"></canvas>
+                        </div>
 
                     </div>
                 </section>
@@ -159,7 +160,57 @@
 
     <script src="{% static "chart.js" %}"></script>
     <script>
-        
+        var myChart = new Chart($('#myChart'), {
+            type: 'radar',
+            data: {
+                labels: ["Liver Cancer", "Lung Cancer", "Prostate Cancer", "Skin Cancer", "Bladder Cancer", "Other"],
+                datasets: [{
+                    label: "% of risk",
+                    backgroundColor: "rgba(179,181,198,0.2)",
+                    borderColor: "rgba(179,181,198,1)",
+                    pointBackgroundColor: "rgba(179,181,198,1)",
+                    pointBorderColor: "#fff",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(179,181,198,1)",
+                    data: [3, 2, 4, 5, 6, 9]
+                }],
+                options: {
+                    scale: {
+                        reverse: true,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            }
+            
+        });
+
+        var myChart2 = new Chart($('#myChart2'), {
+            type: 'radar',
+            data: {
+                labels: ["Liver Cancer", "Lung Cancer", "Prostate Cancer", "Skin Cancer", "Bladder Cancer", "Other"],
+                datasets: [{
+                    label: "% of risk",
+                    backgroundColor: "rgba(179,255,198,0.2)",
+                    borderColor: "rgba(179,244,198,1)",
+                    pointBackgroundColor: "rgba(179,181,198,1)",
+                    pointBorderColor: "#fff",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(179,181,198,1)",
+                    data: [4, 1, 3, 5, 6, 8]
+                }],
+                options: {
+                    scale: {
+                        reverse: true,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            }
+            
+        });
     </script>
 
 </body>
