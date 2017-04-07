@@ -26,6 +26,18 @@ class AnswerQuestionsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AnswerQuestionsView, self).get_context_data(**kwargs)
-                
+        questionJson = []
+        for question in models.Question.objects.all():
+            questionJson.append({
+                "pk": question.pk,
+                "text": str(question),
+                "choices": [
+                    {
+                        "text": answer.answer,
+                        "pk": answer.pk
+                    } for answer in question.answers.all()
+                ]
+            })
+        context['questionJson'] = questionJson
         return context
         
