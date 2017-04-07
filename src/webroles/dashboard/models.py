@@ -49,3 +49,14 @@ class _DiseaseModel(models.Model):
 
     def similarity(self, userResponseModel):
         return 0
+
+class FeedBackModel(models.Model):
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.subject
