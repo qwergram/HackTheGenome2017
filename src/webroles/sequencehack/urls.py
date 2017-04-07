@@ -20,5 +20,9 @@ from dashboard import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/questions', views.QuestionAPI.as_view()),
-    url(r'^$', views.SplashPage.as_view())
+    url(r'^$', views.SplashPage.as_view()),
+    url(r'^questions/', views.AnswerQuestionsView.as_view()),
+    url(r'^submit/$', views.HandleAnswersView.as_view()), # Submission endpoint
+    url(r'^dashboard/$', views.DashboardView.as_view())
+    # ... Need endpoints for various APIs
 ]

@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	TODO: Clean this up into several files
+-->
+<html>
+
+<head>
+    <title>Hack the Genome: Team 0</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="{% static "readonly/js/ie/html5shiv.js" %}"></script><![endif]-->
+    <link rel="stylesheet" href="{% static "readonly/css/main.css" %}"/>
+    <!--[if lte IE 8]><link rel="stylesheet"href="{% static "readonly/css/ie8.css" %}"/><![endif]-->
+</head>
+
+<body>
+
+    <!-- Header -->
+    <section id="header">
+        <header>
+            <span class="image avatar"><img src="{% static "images/avatar.jpg" %}"alt=""/></span>
+            <h1 id="logo"><a href="#">Pengra | Salley</a></h1>
+            <p>Hack the Genome 2017</p>
+        </header>
+        <nav id="nav">
+            <ul>
+                <li><a href="#one" class="active">Your Results</a></li>
+                <li><a href="#two" class="active">Genome Story</a></li>
+                <li><a href="#three">Questionaire Story</a></li>
+                <li><a href="#four">Feedback</a></li>
+            </ul>
+        </nav>
+        <footer>
+            <ul class="icons">
+                <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+                <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+        </footer>
+    </section>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <div id="main">
+
+            <!-- One -->
+            <section id="one">
+                <div class="container">
+                    <header class="major">
+                        <h2>//Hack the Genome: <br/> Team Zero</h2>
+                        <p>Your results</p>
+                    </header>
+                    <p>
+                        This website is designed to give you an idea of potential health issues you might be at risk for. Results are much more accurate
+                        if you include data from <a href="http://sequencing.com">Sequencing.com</a>.
+                        <br/><br/> (Keep in mind that this site is purely for fun. Don't take anything TOO seriously.)
+                    </p>
+                    <div class="row">
+                        <div class="6u">
+                            <a href="/questions/"><input class="12u special" type="button" value="Try Again!"></a>
+                        </div>
+                        <div class="6u">
+                            <a href="https://github.com/qwergram/HackTheGenome2017/"><input class="12u" type="button" value="See Source Code"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="12u" style="text-align: center">
+                            <br/>
+                            Thanks for using our site!
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <form id="form" method="post" action="/submit/">
+
+                <!-- Two -->
+                <section id="two">
+                    <div class="container">
+                        <!-- style="opacity: 0.2;"> <!-- -->
+                        <h3>Genome Story</h3>
+                        
+                        <div class="row">
+                            <canvas id="myChart" width="400" height="400"></canvas>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Three -->
+                <section id="three">
+                    <div class="container">
+                        <h3>Questionaire Story</h3>
+
+                        <div class="row">
+                            <canvas id="myChart2" width="400" height="400"></canvas>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Four -->
+                <section id="four">
+                    <div class="container">
+                        <h3>Feedback</h3>
+                        <p>How do you feel about the results? Let us know what you think!</p>
+                        <form method="POST" action="/submit/">
+                            <div class="row uniform">
+                                <div class="6u 12u(xsmall)"><input type="text" name="name" id="name" placeholder="Name (optional)" /></div>
+                                <div class="6u 12u(xsmall)"><input type="email" name="email" id="email" placeholder="Email (optional)" /></div>
+                            </div>
+                            <div class="row uniform">
+                                <div class="12u"><input type="text" name="subject" id="subject" placeholder="Subject (optional)" /></div>
+                            </div>
+                            <div class="row uniform">
+                                <div class="12u"><textarea name="message" id="message" placeholder="Message (optional)" rows="6"></textarea></div>
+                            </div>
+                            <div class="row uniform">
+                                <div class="12u">
+                                    <ul class="actions">
+                                        <li><input type="submit" class="special" value="Submit Form" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                </section>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <section id="footer">
+            <div class="container">
+                <ul class="copyright">
+                    <li>&copy; MIT License. All rights reserved.</li>
+                    <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static "readonly/js/jquery.min.js" %}"></script>
+    <script src="{% static "readonly/js/jquery.scrollzer.min.js" %}"></script>
+    <script src="{% static "readonly/js/jquery.scrolly.min.js" %}"></script>
+    <script src="{% static "readonly/js/skel.min.js" %}"></script>
+    <script src="{% static "readonly/js/util.js" %}"></script>
+    <!--[if lte IE 8]><script src="{% static "readonly/js/ie/respond.min.js" %}"></script><![endif]-->
+    <script src="{% static "readonly/js/main.js" %}"></script>
+
+    <script src="{% static "chart.js" %}"></script>
+    <script>
+        var myChart = new Chart($('#myChart'), {
+            type: 'radar',
+            data: {
+                labels: ["Liver Cancer", "Lung Cancer", "Prostate Cancer", "Skin Cancer", "Bladder Cancer", "Other"],
+                datasets: [{
+                    label: "% of risk",
+                    backgroundColor: "rgba(179,181,198,0.2)",
+                    borderColor: "rgba(179,181,198,1)",
+                    pointBackgroundColor: "rgba(179,181,198,1)",
+                    pointBorderColor: "#fff",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(179,181,198,1)",
+                    data: [3, 2, 4, 5, 6, 9]
+                }],
+                options: {
+                    scale: {
+                        reverse: true,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            }
+            
+        });
+
+        var myChart2 = new Chart($('#myChart2'), {
+            type: 'radar',
+            data: {
+                labels: ["Liver Cancer", "Lung Cancer", "Prostate Cancer", "Skin Cancer", "Bladder Cancer", "Other"],
+                datasets: [{
+                    label: "% of risk",
+                    backgroundColor: "rgba(179,255,198,0.2)",
+                    borderColor: "rgba(179,244,198,1)",
+                    pointBackgroundColor: "rgba(179,181,198,1)",
+                    pointBorderColor: "#fff",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(179,181,198,1)",
+                    data: [4, 1, 3, 5, 6, 8]
+                }],
+                options: {
+                    scale: {
+                        reverse: true,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            }
+            
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,7 +1,8 @@
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import TemplateView
-from dashboard import models
+from dashboard import models, forms
 import json
 
 
@@ -21,7 +22,63 @@ class QuestionAPI(View):
 class SplashPage(TemplateView):
     template_name = "dashboard/splash.html"
 
-class AnswerQuestionsView(View):
 
-    def get(self, request):
-        pass
+class AnswerQuestionsView(TemplateView):
+    template_name = "dashboard/_questions.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(AnswerQuestionsView, self).get_context_data(**kwargs)
+        questionJson = []
+        for question in models.Question.objects.all():
+            questionJson.append({
+                "pk": question.pk,
+                "text": str(question),
+                "choices": [
+                    {
+                        "text": answer.answer,
+                        "pk": answer.pk
+                    } for answer in question.answers.all()
+                ]
+            })
+        context['questionJson'] = questionJson
+        return context
+        
+
+class HandleAnswersView(View):
+    template_name = "dashboard/_questions.html"
+
+    def post(self, request, *args, **kwargs):        
+        jsonblob = {}
+
+        contactForm = forms.ContactForm(request.POST)
+        genomeForm = forms.GenomeForm(request.POST)
+        questionForm = forms.BasicQuestionaire(request.POST)
+
+        if (questionForm.is_valid()):
+            try:
+                jsonblob = {int(q[1:]): int(a[1:]) for (q, a) in questionForm.questions.items()}
+            except ValueError:
+                jsonblob = {}
+
+        if (GenomeForm.is_valid()):
+            pass
+
+        if (contactForm.is_valid()):
+            newFeedBack = models.FeedBackModel(
+                name=contactForm.cleaned_data['name'],
+                email=contactForm.cleaned_data['email'],
+                message=contactForm.cleaned_data['message'],
+                subject=contactForm.cleaned_data['subject']
+            )
+            newFeedBack.save()
+
+        return render(request, self.template_name, {})
+
+
+class DashboardView(TemplateView):
+    template_name = 'dashboard/results.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+        
+        return context
