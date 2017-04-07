@@ -21,7 +21,11 @@ class QuestionAPI(View):
 class SplashPage(TemplateView):
     template_name = "dashboard/splash.html"
 
-class AnswerQuestionsView(View):
+class AnswerQuestionsView(TemplateView):
+    template_name = "dashboard/_questions.html"
 
-    def get(self, request):
-        pass
+    def get_context_data(self, **kwargs):
+        context = super(AnswerQuestionsView, self).get_context_data(**kwargs)
+                
+        return context
+        
