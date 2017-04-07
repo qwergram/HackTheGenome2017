@@ -17,7 +17,7 @@ class UsageExample(object):
 
     def __init__(self, token, fileid, chain):
         self.token = token
-        self.fileid = fileid
+        self.fileId = fileid
         self.chain = chain
         self.chains = AppChains(self.token, self.url)
         #print(self.get_public_beacon_test())
