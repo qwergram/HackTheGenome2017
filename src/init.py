@@ -1,11 +1,21 @@
-def initialize(x):
+from AppChains import AppChains
+from AppChains import Result
+from AppChains import ResultValue
+from AppChains import FileResultValue
+from AppChains import Report
 
-    # i = 0
-    array1 = [0 for _ in range(20)]
 
-    # i = 0
-    for _, i in enumerate(array1):
-        array1[i] = 0
 
-i = 0
-initialize(i)
+
+chains = AppChains('5de67613bf4e146517a3a63d21cfa9448d9ea65e', 'api.sequencing.com')
+chains_result = chains.getReport('StartApp', 'Chain961', '<FILE ID HERE>')
+if chains_result.isSucceeded():
+    print('Request has succeeded')
+else:
+    print('Request has failed')
+    for r in chains_result.getResults():
+        file_type = r.getValue().getType()
+        v = r.getValue()
+        if file_type == 'TEXT':
+            print('-> text result type {} = {}'.format(
+                r.getName(), v.getData()))
