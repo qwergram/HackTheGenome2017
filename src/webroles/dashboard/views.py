@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import TemplateView
@@ -41,3 +42,15 @@ class AnswerQuestionsView(TemplateView):
         context['questionJson'] = questionJson
         return context
         
+
+class HandleAnswersView(View):
+    template_name = "dashboard/_questions.html"
+
+    def post(self, request, *args, **kwargs):
+        return render(request, self.template_name, {})
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # <process form cleaned data>
+            return HttpResponseRedirect('/success/')
+
+        return render(request, self.template_name, {'form': form})
