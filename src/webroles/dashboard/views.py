@@ -11,6 +11,21 @@ from dashboard.chains.skinCancerRisk import SkinCancerRiskView
 from dashboard.chains.liverCancerRisk import LiverCancerRiskView
 from dashboard.chains.prostateCancerRisk import ProstateCancerRiskView
 
+
+# Include Questionaire views
+
+class QuestionaireAPI(View):
+    
+    def get(self, request):
+        responsePk = request.GET['pk']
+        try:
+            userResponse = models.UserResponse.objects.get(pk=int(responsePk))
+        except ValueError:
+            userResponse = models.UserResponse.objects.get(pk=0)
+
+        return HttpResponse(json.dumps(userResponse.getScores(), indent=2))
+
+
 # Other Views
 
 class QuestionAPI(View):
@@ -65,14 +80,25 @@ class HandleAnswersView(View):
         genomeForm = forms.GenomeForm(request.POST)
         questionForm = forms.BasicQuestionaire(request.POST)
 
+        questionFormID = "?"
+        genomeFileId = ""
+        feedBack = ""
+
         if (questionForm.is_valid()):
-            try:
-                jsonblob = {int(q[1:]): int(a[1:]) for (q, a) in questionForm.questions.items()}
-            except ValueError:
-                jsonblob = {}
+            jsonblob = {int(q[1:]): int(a[1:]) for (q, a) in questionForm.questions.items()}
+            obj = models.UserResponse(
+                result=str(jsonblob)
+            )
+            obj.save()
+            questionFormID += "pk=" + str(obj.pk)
+                            
+            # Save model, send pk of user response to next page
 
         if (genomeForm.is_valid()):
-            print(genomeForm.cleaned_data)
+            if len(questionFormID) == 1:
+                genomeFileId = "fileId=" + str(file)
+            else:
+                genomeFileId = "&fileId=" + str(file)
 
         if (contactForm.is_valid()):
             newFeedBack = models.FeedBackModel(
@@ -82,8 +108,12 @@ class HandleAnswersView(View):
                 subject=contactForm.cleaned_data['subject']
             )
             newFeedBack.save()
-
-        return render(request, self.template_name, {})
+            if len(questionFormID) == 1 and len(genomeFileId):
+                feedBack = "&feedback=true"
+            else:
+                feedBack = "feedback=true"
+            
+        return render(request, self.template_name, {"feedBack": feedBack, "fileId": genomeFileId, "pk": questionFormID})
 
 
 class DashboardView(TemplateView):

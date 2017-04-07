@@ -22,6 +22,9 @@ urlpatterns = [
     
     # primitive API
     url(r'^api/v1/questions', views.QuestionAPI.as_view()),
+    url(r'^api/v1/userResponse', views.QuestionaireAPI.as_view()),
+
+    # chain API
     url(r'^api/v1/skin', views.SkinCancerRiskView.as_view()),
     url(r'^api/v1/liver', views.LiverCancerRiskView.as_view()), # app chain doesn't work!
     url(r'^api/v1/prostate', views.ProstateCancerRiskView.as_view()),
