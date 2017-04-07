@@ -40,17 +40,13 @@ class BasicQuestionaire(object):
         
     def _retrieveQuestions(self):
         for key, value in self.post.items():
-            if key.startswith('q') and key not in questions:
-                questions[key] = value
-            else:
+            if key in self.questions:
                 self.questions = {}
                 break
+            elif key.startswith('q'):
+                self.questions[key] = value
         else:
             self._is_valid = True
     
     def is_valid(self):
         return self._is_valid
-
-
-class GeneticCodeIncludedForm(forms.Form):
-    forms.
