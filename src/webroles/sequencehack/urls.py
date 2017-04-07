@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^$', views.SplashPage.as_view()),
     url(r'^questions/', views.AnswerQuestionsView.as_view()),
     url(r'^submit/$', views.HandleAnswersView.as_view()), # Submission endpoint
+    url(r'^dashboard/$', views.DashboardView.as_view())
     # ... Need endpoints for various APIs
 ]
