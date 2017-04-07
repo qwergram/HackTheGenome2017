@@ -46,7 +46,7 @@ class BasicQuestionaire(object):
             elif key.startswith('q'):
                 self.questions[key] = value
         else:
-            self._is_valid = True
+            self._is_valid = True and len(self.questions) > 5
     
     def is_valid(self):
         return self._is_valid
