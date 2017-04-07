@@ -22,6 +22,7 @@ class QuestionAPI(View):
 class SplashPage(TemplateView):
     template_name = "dashboard/splash.html"
 
+
 class AnswerQuestionsView(TemplateView):
     template_name = "dashboard/_questions.html"
 
@@ -42,19 +43,7 @@ class AnswerQuestionsView(TemplateView):
         context['questionJson'] = questionJson
         return context
         
-"""
-<QueryDict: {
-    'subject': [''], 
-    'q4': ['a12'], 
-    'message': [''], 
-    'email': [''], 
-    'file_button': ['on'], 
-    'csrfmiddlewaretoken': ['czeH0ah7wR0Huyt7Fzcn4XTgCBt0ZzCTt46LRX1QEY4iuvgY6ypi8JcCnjTEwWpf'], 
-    'q2': ['a6'], 'q5': ['a14'], 
-    'file': ['237697'], 'q3': ['a8'], 
-    'q1': ['a1'], 'name': ['']
-}>
-"""
+
 class HandleAnswersView(View):
     template_name = "dashboard/_questions.html"
 
@@ -84,3 +73,12 @@ class HandleAnswersView(View):
             newFeedBack.save()
 
         return render(request, self.template_name, {})
+
+
+class DashboardView(TemplateView):
+    template_name = 'dashboard/results.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+        
+        return context
