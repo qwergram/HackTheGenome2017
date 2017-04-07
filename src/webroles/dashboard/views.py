@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import TemplateView
-from dashboard import models
+from dashboard import models, forms
 import json
 
 
@@ -47,8 +47,17 @@ class HandleAnswersView(View):
     template_name = "dashboard/_questions.html"
 
     def post(self, request, *args, **kwargs):
+        
+        contactForm = forms.ContactForm(request.POST)
+        genomeForm = forms.GenomeForm(request.POST)
+        questionForm = forms.BasicQuestionaire(request.POST)
+
+        print(request.POST)
+
+        # import pdb; pdb.set_trace()
+
         return render(request, self.template_name, {})
-        form = self.form_class(request.POST)
+
         if form.is_valid():
             # <process form cleaned data>
             return HttpResponseRedirect('/success/')
