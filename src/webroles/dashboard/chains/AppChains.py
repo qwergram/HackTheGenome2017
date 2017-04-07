@@ -3,10 +3,9 @@ from __future__ import unicode_literals
 
 import json
 import time
-import urllib
+import urllib.parse as urllib
 
-import urllib2
-
+import requests
 
 class ReportException(Exception):
     pass
@@ -491,9 +490,9 @@ class AppChains(object):
 
     def getBaseAppChainsUrl(self):
         """Constructs base Appchains URL"""
-        return '{}://{}:{}'.format(
-            self.DEFAULT_APPCHAINS_SCHEMA, self.hostname,
-            self.DEFAULT_APPCHAINS_PORT)
+        return '{}://{}'.format(
+            self.DEFAULT_APPCHAINS_SCHEMA, self.hostname)
+            # self.DEFAULT_APPCHAINS_PORT)
 
     def getBeaconUrl(self, method_name, query_string):
         """Constructs URL for accessing beacon related remote endpoints
@@ -501,9 +500,9 @@ class AppChains(object):
         (i.e. SequencingBeacon)
         :param query_string: query string
         """
-        return '{}://{}:{}/{}?{}'.format(
+        return '{}://{}/{}?{}'.format(
             self.DEFAULT_APPCHAINS_SCHEMA, self.BEACON_HOSTNAME,
-            self.DEFAULT_APPCHAINS_PORT, method_name, query_string
+            method_name, query_string
         )
 
     def downloadFile(self, url, file_name):
@@ -522,13 +521,11 @@ class AppChains(object):
         :param curl_attributes: additional cURL attributes
         """
         headers = self.getHeaders()
-        request = urllib2.Request(url=url, data=body, headers=headers)
-        try:
-            request = urllib2.urlopen(request)
-        except urllib2.HTTPError as e:
-            raise ReportException(e.msg)
-        response_code = request.getcode()
-        response_body = request.read()
+
+        request = requests.post(url=url, data=body, headers=headers)
+
+        response_code = request.status_code
+        response_body = request.text
         if handler:
             handler.write(response_body)
         return HttpResponse(response_code, response_body)

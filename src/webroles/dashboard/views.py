@@ -5,6 +5,11 @@ from django.views.generic import TemplateView
 from dashboard import models, forms
 import json
 
+# Include Chains views
+
+from dashboard.chains.skinCancerRisk import SkinCancerRiskView
+
+# Other Views
 
 class QuestionAPI(View):
     
@@ -60,8 +65,8 @@ class HandleAnswersView(View):
             except ValueError:
                 jsonblob = {}
 
-        if (GenomeForm.is_valid()):
-            pass
+        if (genomeForm.is_valid()):
+            print(genomeForm.cleaned_data)
 
         if (contactForm.is_valid()):
             newFeedBack = models.FeedBackModel(
