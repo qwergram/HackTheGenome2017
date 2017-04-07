@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	TODO: Clean this up into several files
+-->
+<html>
+
+<head>
+	<title>Hack the Genome: Team 0</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lte IE 8]><script src="{% static "readonly/js/ie/html5shiv.js" %}"></script><![endif]-->
+	<link rel="stylesheet" href="{% static "readonly/css/main.css" %}"/>
+	<!--[if lte IE 8]><link rel="stylesheet"href="{% static "readonly/css/ie8.css" %}"/><![endif]-->
+</head>
+
+<body>
+
+	<!-- Header -->
+	<section id="header">
+		<header>
+			<span class="image avatar"><img src="{% static "images/avatar.jpg" %}"alt=""/></span>
+			<h1 id="logo"><a href="#">Pengra | Salley</a></h1>
+			<p>Hack the Genome 2017</p>
+		</header>
+		<nav id="nav">
+			<ul>
+				<li><a href="#one" class="active">Mode Selection</a></li>
+				<li><a href="#two">Genome Selection</a></li>
+				<li><a href="#three">Health Questions</a></li>
+				<li><a href="#four">Submit</a></li>
+			</ul>
+		</nav>
+		<footer>
+			<ul class="icons">
+				<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+				<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+			</ul>
+		</footer>
+	</section>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- One -->
+			<section id="one">
+				<div class="container">
+					<header class="major">
+						<h2>//Hack the Genome: <br/> Team Zero</h2>
+                        <p>Your results</p>
+					</header>
+					<p>
+						This website is designed to give you an idea of potential health issues you might be at risk for. Results are much more accurate
+						if you include data from <a href="http://sequencing.com">Sequencing.com</a>.
+						<br/><br/> (Keep in mind that this site is purely for fun. Don't take anything TOO seriously.)
+					</p>
+					<div class="row">
+						<div class="6u">
+							<input class="12u special" type="button" value="Include my Genetic code :)">
+						</div>
+						<div class="6u">
+							<input class="12u" type="button" value="Exclude my Genetic code :(">
+						</div>
+					</div>
+					<!--<p>Faucibus sed lobortis aliquam lorem blandit. Lorem eu nunc metus col. Commodo id in arcu ante lorem ipsum sed accumsan erat praesent faucibus commodo ac mi lacus. Adipiscing mi ac commodo. Vis aliquet tortor ultricies non ante erat nunc integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non. Adipiscing cubilia elementum.</p>-->
+				</div>
+			</section>
+
+			<form id="form" method="post" action="/submit/">
+
+			<!-- Two -->
+			<section id="two">
+				<div class="container">
+					<!-- style="opacity: 0.2;"> <!-- -->
+					<h3>Genome Selection</h3>
+					<p>Select your Genome from +RTP
+
+						<div class="container">
+							<input type="hidden" name="file" id="sequencing-file-selector-example" />
+						</div>
+
+					</p>
+				</div>
+			</section>
+
+			<!-- Three -->
+			<section id="three">
+				<div class="container">
+					<h3>Health Questions</h3>
+					
+						
+					
+				</div>
+			</section>
+
+			<!-- Four -->
+			<section id="four">
+				<div class="container">
+					<h3>Submit</h3>
+					<p>If you have any questions or comments, feel free to drop them off here!</p>
+					
+						<div class="row uniform">
+							<div class="6u 12u(xsmall)"><input type="text" name="name" id="name" placeholder="Name (optional)" /></div>
+							<div class="6u 12u(xsmall)"><input type="email" name="email" id="email" placeholder="Email (optional)" /></div>
+						</div>
+						<div class="row uniform">
+							<div class="12u"><input type="text" name="subject" id="subject" placeholder="Subject (optional)" /></div>
+						</div>
+						<div class="row uniform">
+							<div class="12u"><textarea name="message" id="message" placeholder="Message (optional)" rows="6"></textarea></div>
+						</div>
+						<div class="row uniform">
+							<div class="12u">
+								<ul class="actions">
+									<li><input type="submit" class="special" value="Submit Form" /></li>
+								</ul>
+							</div>
+						</div>
+				</div>
+			</section>
+			{% csrf_token %}
+		</form>
+		</div>
+
+		<!-- Footer -->
+		<section id="footer">
+			<div class="container">
+				<ul class="copyright">
+					<li>&copy; MIT License. All rights reserved.</li>
+					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="{% static "readonly/js/jquery.min.js" %}"></script>
+	<script src="{% static "readonly/js/jquery.scrollzer.min.js" %}"></script>
+	<script src="{% static "readonly/js/jquery.scrolly.min.js" %}"></script>
+	<script src="{% static "readonly/js/skel.min.js" %}"></script>
+	<script src="{% static "readonly/js/util.js" %}"></script>
+	<!--[if lte IE 8]><script src="{% static "readonly/js/ie/respond.min.js" %}"></script><![endif]-->
+	<script src="{% static "readonly/js/main.js" %}"></script>
+	<script type="text/javascript" src="{% static "readonly/js/rtp.fileselect.js" %}"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#sequencing-file-selector-example').sequencingFileSelector({
+				accessToken: 'b41d14a1a576202e8929b045b18e96828cc7bf21'
+			});
+		});
+
+	</script>
+
+</body>
+
+</html>
