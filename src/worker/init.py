@@ -7,15 +7,16 @@ from AppChains import Report
 
 
 
-chains = AppChains('5de67613bf4e146517a3a63d21cfa9448d9ea65e', 'api.sequencing.com')
-chains_result = chains.getReport('StartApp', 'Chain961', '<FILE ID HERE>')
+chains = AppChains('c68bc5dbb7907b0be2d44a672788f685810b56a5', 'api.sequencing.com')
+chains_result = chains.getReport('StartApp', 'Chain961', '80599')
 if chains_result.isSucceeded():
     print('Request has succeeded')
-else:
-    print('Request has failed')
-    for r in chains_result.getResults():
-        file_type = r.getValue().getType()
-        v = r.getValue()
+    for result in chains_result.getResults():
+        file_type = result.getValue().getType()
+        v = result.getValue()
         if file_type == 'TEXT':
+            import pdb; pdb.set_trace()
             print('-> text result type {} = {}'.format(
                 r.getName(), v.getData()))
+else:
+    print('Request has failed')
