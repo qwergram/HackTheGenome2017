@@ -22,7 +22,6 @@ urlpatterns = [
     url(r'^api/v1/questions', views.QuestionAPI.as_view()),
     url(r'^$', views.SplashPage.as_view()),
     url(r'^questions/', views.AnswerQuestionsView.as_view()),
-    # url(r'^genomes/', views....as_view()), # Page for selection genome set
-    # url(r'^submit/questions/$', views.....as_view()), # Submission for questions
+    url(r'^submit/$', views.HandleAnswersView.as_view()), # Submission endpoint
     # ... Need endpoints for various APIs
 ]

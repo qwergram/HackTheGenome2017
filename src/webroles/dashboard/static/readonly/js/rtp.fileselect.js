@@ -69,15 +69,16 @@ SequencingFileSelector = function(formElement, options) {
   this.table.parents('.sequencing-file-selector-table-container')
     .prepend($('<p></p>').addClass('sequencing-file-selector-help-text').html('Select a file from the list below<br /><span class="sequencing-file-selector-help-text-brackets">(The genetic data from the file you select will be used to personalize this app.)</span>'));
 
-  if ($(this.formElement).parents('form').size() > 0) {
-    $(this.formElement).parents('form').submit(function() {
-      if (!$(obj.formElement).val()) {
-        obj.validationClean();
-        obj.switch.after($('<p></p>').addClass('error').html('No file selected. Select a file before continuing.'));
-        return false;
-      }
-    });
-  }
+  // Allow the user to submit nothing because there's more in the form
+  // if ($(this.formElement).parents('form').size() > 0) {
+  //   $(this.formElement).parents('form').submit(function() {
+  //     if (!$(obj.formElement).val()) {
+  //       obj.validationClean();
+  //       obj.switch.after($('<p></p>').addClass('error').html('No file selected. Select a file before continuing.'));
+  //       return false;
+  //     }
+  //   });
+  // }
 };
 
 /**

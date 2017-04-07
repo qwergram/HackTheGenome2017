@@ -23,7 +23,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, unique=True)),
             ],
-            bases=(models.Model, dashboard.models.TimeStampMixin, dashboard.models.JsonResultMixin),
         ),
         migrations.CreateModel(
             name='Answer',
@@ -31,7 +30,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('answer', models.CharField(max_length=255)),
             ],
-            bases=(models.Model, dashboard.models.TimeStampMixin),
         ),
         migrations.CreateModel(
             name='Question',
@@ -39,7 +37,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('question', models.CharField(max_length=255, unique=True)),
             ],
-            bases=(models.Model, dashboard.models.TimeStampMixin),
         ),
         migrations.CreateModel(
             name='UserResponse',
@@ -47,7 +44,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='responses', to=settings.AUTH_USER_MODEL)),
             ],
-            bases=(models.Model, dashboard.models.TimeStampMixin, dashboard.models.JsonResultMixin),
         ),
         migrations.AddField(
             model_name='answer',
