@@ -37,7 +37,7 @@ class UserResponse(models.Model):
         return 0
 
 
-class _DiseaseModel(models.Model):
+class DiseaseModel(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     name = models.CharField(unique=True, max_length=255)
@@ -49,6 +49,9 @@ class _DiseaseModel(models.Model):
 
     def similarity(self, userResponseModel):
         return 0
+
+    def __str__(self):
+        return self.name
 
 class FeedBackModel(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
